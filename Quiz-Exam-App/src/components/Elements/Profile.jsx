@@ -2,6 +2,7 @@ import React from "react";
 import profilesimg from "../Admin/assetsAdmin/profile-4.jpg";
 import Sun from "../Admin/assetsAdmin/sun.png";
 import Moon from "../Admin/assetsAdmin/moon.png";
+import LoginPageQuizApp from "../Login/LoginPageQuizApp";
 
 const Profile = () => {
  const responsiveBtn = () => {

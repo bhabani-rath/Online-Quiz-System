@@ -39,18 +39,6 @@ const LoginPageQuizApp = () => {
    });
   }
  };
-
- const submitButtonHandle = (e) => {
-  //Tostify for Login Button
-  toast("Login Successfully", { autoClose: 2000, type: "success" });
-  //Time Interval of 3 Sec before Navigation
-  setTimeout(() => {
-   navigate("/main");
-  }, 3000);
-  if (location.pathname === "/main") {
-   toast("Welcome to QUESTPROBE AdminPanel");
-  }
- };
  //Tostify for Username Input Field
  const uname = () =>
   toast("Enter Your Username Provided Through Email.", {
@@ -85,14 +73,6 @@ const LoginPageQuizApp = () => {
   }
  };
  // Theme Stored End
- window.addEventListener("keydown", (event) => {
-  if (event.code === "Enter") {
-   document.getElementById("logins").click();
-   event.preventDefault();
-   submitButtonHandle();
-  }
- });
-
  // Backend Connection Start
  const [username, setUsername] = useState("");
  const [password, setPassword] = useState("");
@@ -101,65 +81,70 @@ const LoginPageQuizApp = () => {
  };
  const handleSubmit = async (e) => {
   e.preventDefault();
-
   try {
    const response = await axios.post("http://localhost:8080/login", {
     username: username,
     password: password
    });
-   //getting role response from the backend
+   //Getting role response from the backend
    const role = response.data;
    console.log(role.role);
    //Handling the response as role based
    if (role.role === "admin") {
-    MySwal.fire({
-     icon: "success",
-     title: `${role.username}`,
-     text: "Logged in",
-     footer: "Accessing the Admin Panel"
-    }).then(() =>
-     navigate("/admin", { state: { username: username, userid: role.id } })
-    );
+    toast.success(`Welcome ${username} to ${role.role} Panel`, {
+     onClose: () => {
+      navigate("/main"),
+       {
+        state: {
+         username: username,
+         userid: role.id
+        }
+       };
+     }
+    });
    } else if (role.role === "student") {
-    MySwal.fire({
-     icon: "success",
-     title: `${role.username}`,
-     text: `Logged in !`,
-     footer: "Accessing the User Panel"
-    }).then(() =>
-     navigate("/user", {
-      state: {
-       username: username,
-       userid: role.id
+    toast(
+     `Welcome ${username} to ${role} Panel`,
+     { autoClose: 2000, type: "success" },
+     {
+      onClose: () => {
+       navigate("/main"),
+        {
+         state: {
+          username: username,
+          userid: role.id
+         }
+        };
       }
-     })
+     }
     );
-    // setError("User Logged in");
    } else if (role.role === "faculty") {
-    MySwal.fire({
-     icon: "success",
-     title: `${role.username}`,
-     text: `Logged in !`,
-     footer: "Accessing the Faculty Panel"
-    }).then(() =>
-     navigate("/faculty", {
-      state: {
-       username: username,
-       userid: role.id
+    toast(
+     `Welcome ${username} to ${role} Panel`,
+     { autoClose: 2000, type: "success" },
+     {
+      onClose: () => {
+       navigate("/main"),
+        {
+         state: {
+          username: username,
+          userid: role.id
+         }
+        };
       }
-     })
+     }
     );
    } else {
-    MySwal.fire({
-     icon: "error",
-     title: "Oops...",
-     text: "Invalid Credentials !"
-    });
-    // setError("Invalid Credential")
+    toast(
+     `You have not entered the correct credentials or the fields are blank.💀 `,
+     {
+      autoClose: 2000,
+      type: "error"
+     }
+    );
    }
   } catch (error) {
    errorShow();
-   // setError("Failed to Log in")
   }
  };
  // Backend Connection End
@@ -851,6 +836,7 @@ const LoginPageQuizApp = () => {
         id="inpt1"
         value={username}
         onClick={uname}
+        onChange={(e) => setUsername(e.target.value)}
        />
       </div>
       <div className="div-inp2">
@@ -863,6 +849,7 @@ const LoginPageQuizApp = () => {
         id="inpt2"
         value={password}
         onClick={pass}
+        onChange={(e) => setPassword(e.target.value)}
        />
        <div onClick={handleShowPassword}>
         {show ? (
@@ -872,22 +859,20 @@ const LoginPageQuizApp = () => {
         )}
        </div>
       </div>
-      <div className="fpass">
-       <a href="#">Forgot Password?</a>
-      </div>
+
       <div className="div-checkbox">
-       <a className="p3">
-        I agree the <a href="#">terms and conditions </a>applied for the
+       <Link className="p3">
+        I agree the <Link>terms and conditions </Link>applied for the
         examination.
-       </a>
+       </Link>
       </div>
       <div className="btn-div">
        <div className="div-btn-1">
-        <a onClick={submitButtonHandle} id="logins">
+        <Link onClick={handleSubmit} id="logins">
          <button className="login-btn" type="button">
           LogIn
          </button>
-        </a>
+        </Link>
        </div>
        <div className="div-btn-2">
         <button className="login-btn1" type="reset" onClick={reset}>

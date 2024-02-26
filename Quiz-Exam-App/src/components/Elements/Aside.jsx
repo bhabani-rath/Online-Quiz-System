@@ -2,7 +2,7 @@ import React from "react";
 import logo from "../Admin/assetsAdmin/questprobelogo.svg";
 import { Link } from "react-router-dom";
 
-const Aside = () => {
+const Aside = (username) => {
  return (
   <div>
    {/* <!-- =========Start of Sidebar========= --> */}

@@ -1,78 +1,104 @@
-import React from "react";
+import { React, useMemo, useState, useEffect } from "react";
 import AdminPanel from "../Admin/AdminPanel";
-import { Link } from "react-router-dom";
-import "../CSS/app.css";
-import DataTable from "react-data-table-component";
-import QuizData from "../TableData/QuizData";
+import axios from "axios";
 
 const Allquiz = () => {
- const column = [
-  { name: "Sl no.", selector: (row) => row.id, sortable: true },
-  { name: "Quiz Name", selector: (row) => row.name, sortable: true },
-  { name: "Creator", selector: (row) => row.creator, sortable: true },
-  {
-   name: "Total Responses",
-   selector: (row) => row.totalResponses,
-   sortable: true
-  },
-  { name: "Actions", selector: (row) => row.actions }
- ];
- const customTableStyles = {
-  rows: {
-   style: {
-    backgroundColor: "var(--color-background)",
-    color: "var(--color-dark)" // Replace with your dark background color
-   }
-  },
-  headCells: {
-   style: {
-    backgroundColor: "var(--color-background)", // Replace with your dark header color
-    color: "var(--color-dark)" // Set text color for header cells
-   }
-  },
-  pagination: {
-   style: {
-    backgroundColor: "var(--color-white)", // Replace with your dark pagination background color
-    color: "var(--color-dark)" // Set text color for pagination
-   },
-   pageLinks: {
-    color: "var(--color-white)" // Set color for pagination links
-   }
-  },
-  arrows: {
-   color: "var(--color-white)" // Set color for pagination arrows to white
-  },
-  dots: {
-   color: "--color-white" // Set color for pagination dots to white
+ /*<---=========Backend Start=========--->*/
+ const [quizz, setQuizzes] = useState([]);
+ const [error, setError] = useState("");
+
+ useEffect(() => {
+  fetchQuizzes();
+ }, []);
+
+ const fetchQuizzes = async () => {
+  try {
+   const response = await axios.get("http://localhost:8080/api/quizzes");
+   setQuizzes(response.data);
+  } catch (error) {
+   setError("Failed to fetch questions");
   }
  };
+
+ const handleDeleteQuizzes = async (id) => {
+  try {
+   console.log(id);
+   await axios.delete(`http://localhost:8080/api/quizzes/${id}`);
+   fetchQuizzes(); // Refresh the question list
+  } catch (error) {
+   setError("Failed to delete question");
+  }
+ };
+ /*<---=========Backend End=========--->*/
+
+ // Pagination state
+ const [pageIndex, setPageIndex] = useState(0);
+ const [pageSize, setPageSize] = useState(10); // Set your desired page size
+
+ // Slice the data based on pagination
+ const paginatedData = useMemo(() => {
+  const startIndex = pageIndex * pageSize;
+  const endIndex = startIndex + pageSize;
+  return quizz.slice(startIndex, endIndex);
+ }, [quizz, pageIndex, pageSize]);
+
  return (
   <AdminPanel>
+   {/* <!-- =========Start of All Admins Table========= --> */}
    <main>
-    <h1>Quizzes</h1>
-    <div>
-     <DataTable
-      columns={column}
-      data={QuizData}
-      fixedHeader
-      pagination
-      paginationPerPage={10}
-      paginationRowsPerPageOptions={[5, 10, 15]}
-      pointerOnHover
-      customStyles={customTableStyles}
-      style={{ boxShadow: "var(--box-shadow-hover)" }}
-     ></DataTable>
+    <div className="recent-orders">
+     <h2>Quizzes</h2>
+     <table>
+      <thead>
+       <tr>
+        <th>Sl No.</th>
+        <th>Quizz Name</th>
+        <th>Technology Name</th>
+        <th>Action</th>
+       </tr>
+      </thead>
+      <tbody className="adminsTableBody">
+       {paginatedData.map((quizz) => (
+        <tr key={quizz.id}>
+         <td>{quizz.id}</td>
+         <td>{quizz.quizName}</td>
+         <td>{quizz.technology}</td>
+         <td>
+          <button
+           style={{ cursor: "pointer" }}
+           className="danger"
+           onClick={() => handleDeleteQuizzes(quizz.id)}
+          >
+           Delete
+          </button>
+         </td>
+        </tr>
+       ))}
+      </tbody>
+     </table>
+     <div className="button-pagination">
+      <button onClick={() => setPageIndex(0)}>First Page</button>
+      <button
+       disabled={pageIndex >= Math.ceil(quizz.length / pageSize) - 1}
+       onClick={() => setPageIndex((prev) => prev + 1)}
+      >
+       Next Page
+      </button>
+      <button
+       disabled={pageIndex === 0}
+       onClick={() => setPageIndex((prev) => prev - 1)}
+      >
+       Previous Page
+      </button>
+      <button
+       onClick={() => setPageIndex(Math.ceil(quizz.length / pageSize) - 1)}
+      >
+       Last Page
+      </button>
+     </div>
     </div>
-    <h6
-     style={{
-      textAlign: "center",
-      marginTop: "16rem",
-      color: "var(--color-dark)"
-     }}
-    >
-     @Designed By Bhabani
-    </h6>
    </main>
+   {/* <!-- =========End of All Admins Table========= --> */}
   </AdminPanel>
  );
 };

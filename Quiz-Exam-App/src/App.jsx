@@ -2,8 +2,8 @@ import React from "react";
 import LoginPageQuizApp from "./components/Login/LoginPageQuizApp";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AdminPanel from "./components/Admin/AdminPanel";
-import Aside from "./components/Elements/Aside";
-import Profile from "./components/Elements/Profile";
+import Aside from "./components/Admin/Elements/Aside";
+import Profile from "./components/Admin/Elements/Profile";
 import Dashboard from "./components/Pages/Dashboard";
 import Allquiz from "./components/Pages/Allquiz";
 import AllTechnology from "./components/Pages/AllTechnology";
@@ -15,6 +15,9 @@ import Profiles from "./components/Pages/Profiles";
 import LandPage from "./components/LandPage/LandPage";
 
 function App() {
+ //  document.addEventListener("contextmenu", function (e) {
+ //   e.preventDefault();
+ //  });
  return (
   <>
    <Router>
@@ -25,7 +28,7 @@ function App() {
      <Route element={<Profile />} path="/profile" />
      <Route element={<LandPage />} path="/landpage"></Route>
      {/* <---=========Admin Panel Route Pages Start=========---> */}
-     <Route element={<Dashboard />} path="/main" />
+     <Route element={<Dashboard />} path="/dashboard" />
      <Route element={<Allquiz />} path="/allquiz"></Route>
      <Route element={<AllTechnology />} path="/alltech"></Route>
      <Route element={<AddQuizTechnology />} path="/addtech"></Route>

@@ -1,8 +1,63 @@
-import React from "react";
-import logo from "../Admin/assetsAdmin/questprobelogo.svg";
+import { React, useState, useEffect } from "react";
+import logo from "../assetsAdmin/questprobelogo.svg";
 import { Link } from "react-router-dom";
+import { CategorySelectUser } from "../../Services/UserService";
+import axios from "axios";
 
-const Aside = (username) => {
+const Aside = () => {
+ // Backend Connection Start
+ const [user, setUser] = useState([]);
+ const [teacher, setTeacher] = useState(0);
+ const [student, setStudent] = useState(0);
+ const [error, setError] = useState("");
+ const [ques, setQues] = useState(0);
+ const [quiz, setQuiz] = useState(0);
+
+ useEffect(() => {
+  getalluser();
+ }, []);
+
+ const getalluser = async () => {
+  let role = "student";
+  CategorySelectUser(role).then((response) => {
+    setUser(response.data);
+    setStudent(response.data.length);
+    console.log(response.data);
+   })
+   .catch((error) => console.log(error));
+
+  role = "faculty";
+  CategorySelectUser(role).then((response) => {
+    setUser(response.data);
+    setTeacher(response.data.length);
+    console.log(response.data);
+   })
+   .catch((error) => console.log(error));
+
+  try {
+   const response = await axios.get(
+    "http://localhost:8080/api/questions/getAllQuestion"
+   );
+   setQues(response.data.length);
+   console.log("Question: " + response.data);
+  } catch (error) {
+   setError("Failed to fetch questions");
+  }
+
+  try {
+   const response = await axios.get("http://localhost:8080/api/quizzes");
+      setQuiz(response.data.length);
+      console.log("Quizz: " + response.data);
+  } catch (error) {
+   setError("Failed to fetch quizz");
+  }
+ }
+
+ console.log(student);
+ console.log(teacher);
+ console.log(user);
+ console.log(error);
+ // Backend Connection End
  return (
   <div>
    {/* <!-- =========Start of Sidebar========= --> */}
@@ -19,7 +74,10 @@ const Aside = (username) => {
      </div>
     </div>
     <div className="sidebar">
-     <Link to="/main" className={location.pathname === "/main" ? "active" : ""}>
+     <Link
+      to="/dashboard"
+      className={location.pathname === "/dashboard" ? "active" : ""}
+     >
       <span className="material-icons"> dashboard </span>
       <h3>Dashboard</h3>
      </Link>
@@ -29,7 +87,7 @@ const Aside = (username) => {
      >
       <span className="material-icons"> travel_explore </span>
       <h3>
-       Quizzes <span className="message-count">69</span>
+       Quizzes <span className="message-count">{quiz}</span>
       </h3>
      </Link>
      <Link
@@ -54,7 +112,7 @@ const Aside = (username) => {
      >
       <span className="material-icons"> verified_user </span>
       <h3>
-       All Users <span className="message-count">69</span>
+       Students <span className="message-count">{student}</span>
       </h3>
      </Link>
      <Link
@@ -69,7 +127,9 @@ const Aside = (username) => {
       className={location.pathname === "/admin" ? "active" : ""}
      >
       <span className="material-icons"> admin_panel_settings </span>
-      <h3>Admins</h3>
+      <h3>
+       Faculties <span className="message-count">{teacher}</span>
+      </h3>
      </Link>
      <Link
       to="/profiles"

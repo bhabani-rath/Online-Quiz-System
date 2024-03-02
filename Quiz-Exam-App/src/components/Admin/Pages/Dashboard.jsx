@@ -13,6 +13,7 @@ const Dashboard = () => {
  const [error, setError] = useState("");
  const [ques, setQues] = useState(0);
  const [quiz, setQuiz] = useState(0);
+ const [tech, setTech] = useState([]);
 
  useEffect(() => {
   getalluser();
@@ -24,7 +25,7 @@ const Dashboard = () => {
    .then((response) => {
     setUser(response.data);
     setStudent(response.data.length);
-    console.log(response.data);
+    // console.log(response.data);
    })
    .catch((error) => console.log(error));
 
@@ -33,7 +34,7 @@ const Dashboard = () => {
    .then((response) => {
     setUser(response.data);
     setTeacher(response.data.length);
-    console.log(response.data);
+    // console.log(response.data);
    })
    .catch((error) => console.log(error));
 
@@ -42,7 +43,7 @@ const Dashboard = () => {
     "http://localhost:8080/api/questions/getAllQuestion"
    );
    setQues(response.data.length);
-   console.log("Questions" + response.data);
+   //    console.log("Questions" + response.data);
   } catch (error) {
    setError("Failed to fetch questions");
   }
@@ -50,9 +51,15 @@ const Dashboard = () => {
   try {
    const response = await axios.get("http://localhost:8080/api/quizzes");
    setQuiz(response.data.length);
-   console.log("Quizz" + response.data);
+   //    console.log("Quizz" + response.data);
   } catch (error) {
    setError("Failed to fetch quizz");
+  }
+  try {
+   const res = await axios.get("http://localhost:8080/api/quizzes");
+   setTech(res.data.length);
+  } catch (error) {
+   setError("Failed to fetch user responses");
   }
  };
 
@@ -97,7 +104,7 @@ const Dashboard = () => {
       <div className="middle">
        <div className="left">
         <h3>Total Technologies Created</h3>
-        <h1>40+</h1>
+        <h1>{tech}</h1>
        </div>
       </div>
       <small className="text-muted">Last 24 Hours</small>

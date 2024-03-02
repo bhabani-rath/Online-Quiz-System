@@ -105,15 +105,8 @@ const Aside = () => {
      >
       <span className="material-icons"> find_in_page </span>
       <h3>
-       All Techs <span className="message-count">{tech}</span>
+       Techs <span className="message-count">{tech}</span>
       </h3>
-     </Link>
-     <Link
-      to="/addtech"
-      className={location.pathname === "/addtech" ? "active" : ""}
-     >
-      <span className="material-icons"> queue </span>
-      <h3>Add Quiz Tech</h3>
      </Link>
      <Link
       to="/allstudent"
@@ -125,13 +118,6 @@ const Aside = () => {
       </h3>
      </Link>
      <Link
-      to="/adduser"
-      className={location.pathname === "/adduser" ? "active" : ""}
-     >
-      <span className="material-icons"> person_add </span>
-      <h3>Add Users</h3>
-     </Link>
-     <Link
       to="/allfaculty"
       className={location.pathname === "/allfaculty" ? "active" : ""}
      >
@@ -141,13 +127,20 @@ const Aside = () => {
       </h3>
      </Link>
      <Link
+      to="/adduser"
+      className={location.pathname === "/adduser" ? "active" : ""}
+     >
+      <span className="material-icons"> person_add </span>
+      <h3>Add Users</h3>
+     </Link>
+     <Link
       to="/profiles"
       className={location.pathname === "/profiles" ? "active" : ""}
      >
       <span className="material-icons">account_circle</span>
       <h3>Profile</h3>
      </Link>
-     <Link to="/landpage">
+     <Link to="/">
       <span className="material-icons"> logout </span>
       <h3>Logout</h3>
      </Link>

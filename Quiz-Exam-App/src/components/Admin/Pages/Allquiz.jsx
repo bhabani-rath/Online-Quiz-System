@@ -1,6 +1,8 @@
 import { React, useMemo, useState, useEffect } from "react";
 import AdminPanel from "../AdminPanel";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Allquiz = () => {
  /*<---=========Backend Start=========--->*/
@@ -26,8 +28,9 @@ const Allquiz = () => {
 
  const handleDeleteQuizzes = async (id) => {
   try {
-   console.log(id);
+   //  console.log(id);
    await axios.delete(`http://localhost:8080/api/quizzes/${id}`);
+
    fetchQuizzes(); // Refresh the question list
   } catch (error) {
    setError("Failed to delete question");
@@ -75,7 +78,10 @@ const Allquiz = () => {
  };
 
  // Options for page size
- const pageSizeOptions = [5, 10, 15];
+  const pageSizeOptions = [5, 10, 15];
+  const handleOnClickOnSearchBar = () => {
+    
+  }
 
  return (
   <AdminPanel>
@@ -88,6 +94,7 @@ const Allquiz = () => {
        type="text"
        placeholder="🔍Search by Quiz Name or Technology"
        value={searchTerm}
+       
        onChange={(e) => setSearchTerm(e.target.value)}
       />
       {searchTerm && (
@@ -153,6 +160,20 @@ const Allquiz = () => {
     </div>
    </main>
    {/* <!-- =========End of All Admins Table========= --> */}
+   <ToastContainer
+    position="top-right"
+    autoClose={1000}
+    hideProgressBar={false}
+    newestOnTop={true}
+    closeOnClick
+    rtl={false}
+    pauseOnFocusLoss
+    draggable
+    pauseOnHover
+    theme="dark"
+    transition:slide
+    limit="5"
+   />
   </AdminPanel>
  );
 };

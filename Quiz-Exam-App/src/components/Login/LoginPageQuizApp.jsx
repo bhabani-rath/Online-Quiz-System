@@ -14,10 +14,11 @@ const LoginPageQuizApp = () => {
  const navigate = useNavigate();
 
  //Tostify for Reset Button
- const reset = () =>
+ const reset = () => {
   toast.warn("Reset Successfully", {
    autoClose: 1000
   });
+ };
  //handleShowPassword for Change the Type of Text in Password Field
  const handleShowPassword = () => {
   console.log("Before: show =", show);
@@ -25,32 +26,46 @@ const LoginPageQuizApp = () => {
    setShow(true);
    settype("text");
    console.log("After (visible): show =", show);
-   toast.info("Password is visible", {
-    autoClose: 1000,
-    type: "info"
+   toast.warn("Password is Visible🙉", {
+    autoClose: 1000
    });
   } else {
    setShow(false);
    settype("password");
    console.log("After (hidden): show =", show);
-   toast.info("Password is protected", {
+   toast.success("Password is Protected🙈", {
+    autoClose: 1000
+   });
+  }
+ };
+ //Tostify for Username Input Field
+ const uname = () => {
+  if (username == "") {
+   toast("Enter Your Username Provided Through Email.", {
+    autoClose: 1000,
+    type: "info"
+   });
+  } else {
+   toast("Username Alredy Written✅", {
     autoClose: 1000,
     type: "info"
    });
   }
  };
- //Tostify for Username Input Field
- const uname = () =>
-  toast("Enter Your Username Provided Through Email.", {
-   autoClose: 1000,
-   type: "info"
-  });
  //Tostify for Password Input Field
- const pass = () =>
-  toast("Enter Your Password Provided Through Email.", {
-   autoClose: 1000,
-   type: "info"
-  });
+ const pass = () => {
+  if (password == "") {
+   toast("Enter Your Password Provided Through Email.", {
+    autoClose: 1000,
+    type: "info"
+   });
+  } else {
+   toast("Password Already Written✅", {
+    autoClose: 1000,
+    type: "info"
+   });
+  }
+ };
 
  // Theme Stored Start
  const setDarkMode = () => {
@@ -157,7 +172,14 @@ const LoginPageQuizApp = () => {
   }
  };
  // Backend Connection End
-
+ // Hit Enter Button to Login
+ const handleKeyDown = (event) => {
+  if (event.key === "Enter") {
+   event.preventDefault();
+   // If the Enter key is pressed, trigger the login action
+   handleSubmit();
+  }
+ };
  //Design Part of Website
  return (
   <>
@@ -198,20 +220,15 @@ const LoginPageQuizApp = () => {
         value={password}
         onClick={pass}
         onChange={(e) => setPassword(e.target.value)}
+        onKeyDownCapture={handleKeyDown}
        />
        <div onClick={handleShowPassword}>
         {show ? (
-         <i className="fa-solid fa-eye"></i>
-        ) : (
          <i className="fa-solid fa-eye-slash"></i>
+        ) : (
+         <i className="fa-solid fa-eye"></i>
         )}
        </div>
-      </div>
-
-      <div className="div-checkbox">
-       <Link className="p3">
-        I agree the <Link>terms and conditions </Link>by logging in.
-       </Link>
       </div>
       <div className="btn-div">
        <div className="div-btn-1">

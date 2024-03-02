@@ -1,18 +1,23 @@
 import React from "react";
-import LoginPageQuizApp from "./components/Login/LoginPageQuizApp";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+/*<---=========Import Landing Page=========---> */
+import LandPage from "./components/LandPage/LandPage";
+/*<---=========Import Login=========---> */
+import LoginPageQuizApp from "./components/Login/LoginPageQuizApp";
+/*<---=========Import Admin=========---> */
 import AdminPanel from "./components/Admin/AdminPanel";
+/*<---=========Import Admin/Elements=========---> */
 import Aside from "./components/Admin/Elements/Aside";
 import Profile from "./components/Admin/Elements/Profile";
-import Dashboard from "./components/Pages/Dashboard";
-import Allquiz from "./components/Pages/Allquiz";
-import AllTechnology from "./components/Pages/AllTechnology";
-import AddQuizTechnology from "./components/Pages/AddQuizTechnology";
-import AllUser from "./components/Pages/AllUser";
-import AddUser from "./components/Pages/AddUser";
-import AllAdmin from "./components/Pages/AllAdmin";
-import Profiles from "./components/Pages/Profiles";
-import LandPage from "./components/LandPage/LandPage";
+/*<---=========Import Admin/Pages=========---> */
+import AddQuizTechnology from "./components/Admin/Pages/AddQuizTechnology";
+import AddUser from "./components/Admin/Pages/AddUser";
+import Faculty from "./components/Admin/Pages/Faculty";
+import Student from "./components/Admin/Pages/Student";
+import Allquiz from "./components/Admin/Pages/Allquiz";
+import AllTechnology from "./components/Admin/Pages/AllTechnology";
+import Dashboard from "./components/Admin/Pages/Dashboard";
+import Profiles from "./components/Admin/Pages/Profiles";
 
 function App() {
  //  document.addEventListener("contextmenu", function (e) {
@@ -32,9 +37,9 @@ function App() {
      <Route element={<Allquiz />} path="/allquiz"></Route>
      <Route element={<AllTechnology />} path="/alltech"></Route>
      <Route element={<AddQuizTechnology />} path="/addtech"></Route>
-     <Route element={<AllUser />} path="/alluser"></Route>
+     <Route element={<Student />} path="/allstudent"></Route>
      <Route element={<AddUser />} path="/adduser"></Route>
-     <Route element={<AllAdmin />} path="/admin"></Route>
+     <Route element={<Faculty />} path="/allfaculty"></Route>
      <Route element={<Profiles />} path="/profiles"></Route>
      {/* <---=========Route Pages Start=========---> */}
     </Routes>

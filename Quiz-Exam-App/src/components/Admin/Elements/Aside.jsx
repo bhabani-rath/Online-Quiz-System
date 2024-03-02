@@ -12,6 +12,7 @@ const Aside = () => {
  const [error, setError] = useState("");
  const [ques, setQues] = useState(0);
  const [quiz, setQuiz] = useState(0);
+ const [tech, setTech] = useState([]);
 
  useEffect(() => {
   getalluser();
@@ -19,7 +20,8 @@ const Aside = () => {
 
  const getalluser = async () => {
   let role = "student";
-  CategorySelectUser(role).then((response) => {
+  CategorySelectUser(role)
+   .then((response) => {
     setUser(response.data);
     setStudent(response.data.length);
     console.log(response.data);
@@ -27,7 +29,8 @@ const Aside = () => {
    .catch((error) => console.log(error));
 
   role = "faculty";
-  CategorySelectUser(role).then((response) => {
+  CategorySelectUser(role)
+   .then((response) => {
     setUser(response.data);
     setTeacher(response.data.length);
     console.log(response.data);
@@ -46,12 +49,18 @@ const Aside = () => {
 
   try {
    const response = await axios.get("http://localhost:8080/api/quizzes");
-      setQuiz(response.data.length);
-      console.log("Quizz: " + response.data);
+   setQuiz(response.data.length);
+   console.log("Quizz: " + response.data);
   } catch (error) {
    setError("Failed to fetch quizz");
   }
- }
+  try {
+   const res = await axios.get("http://localhost:8080/api/quizzes");
+   setTech(res.data.length);
+  } catch (error) {
+   setError("Failed to fetch user responses");
+  }
+ };
 
  console.log(student);
  console.log(teacher);
@@ -96,7 +105,7 @@ const Aside = () => {
      >
       <span className="material-icons"> find_in_page </span>
       <h3>
-       All Techs <span className="message-count">69</span>
+       All Techs <span className="message-count">{tech}</span>
       </h3>
      </Link>
      <Link
@@ -107,8 +116,8 @@ const Aside = () => {
       <h3>Add Quiz Tech</h3>
      </Link>
      <Link
-      to="/alluser"
-      className={location.pathname === "/alluser" ? "active" : ""}
+      to="/allstudent"
+      className={location.pathname === "/allstudent" ? "active" : ""}
      >
       <span className="material-icons"> verified_user </span>
       <h3>
@@ -123,8 +132,8 @@ const Aside = () => {
       <h3>Add Users</h3>
      </Link>
      <Link
-      to="/admin"
-      className={location.pathname === "/admin" ? "active" : ""}
+      to="/allfaculty"
+      className={location.pathname === "/allfaculty" ? "active" : ""}
      >
       <span className="material-icons"> admin_panel_settings </span>
       <h3>

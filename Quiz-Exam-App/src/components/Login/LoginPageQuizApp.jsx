@@ -115,7 +115,7 @@ const LoginPageQuizApp = () => {
      `Welcome ${username} to ${capitalizeFirstLetter(role.role)} Panel`,
      {
       onClose: () => {
-       navigate("/dashboard"),
+       navigate("/adminpanel/dashboard"),
         {
          state: {
           username: username,
@@ -132,7 +132,7 @@ const LoginPageQuizApp = () => {
      { autoClose: 500, type: "success" },
      {
       onClose: () => {
-       navigate("/dashboard"),
+       navigate("/adminpanel/dashboard"),
         {
          state: {
           username: username,
@@ -148,7 +148,7 @@ const LoginPageQuizApp = () => {
      { autoClose: 500, type: "success" },
      {
       onClose: () => {
-       navigate("/dashboard"),
+       navigate("/adminpanel/dashboard"),
         {
          state: {
           username: username,
@@ -233,7 +233,7 @@ const LoginPageQuizApp = () => {
       <div className="btn-div">
        <div className="div-btn-1">
         <Link onClick={handleSubmit} id="logins">
-         <button className="login-btn" type="button">
+         <button className="login-btn" type="submit">
           LogIn
          </button>
         </Link>
@@ -259,6 +259,7 @@ const LoginPageQuizApp = () => {
     pauseOnHover
     theme="dark"
     transition:slide
+    toastContainerClassName="custom-toast-container"
     limit="5"
    />
   </>

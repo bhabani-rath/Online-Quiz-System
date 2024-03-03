@@ -28,19 +28,20 @@ function App() {
    <Router>
     <Routes>
      <Route element={<LoginPageQuizApp />} path="/" />
-     <Route element={<AdminPanel />} path="/adminpanel" />
      <Route element={<Aside />} path="/aside" />
      <Route element={<Profile />} path="/profile" />
      <Route element={<LandPage />} path="/landpage"></Route>
      {/* <---=========Admin Panel Route Pages Start=========---> */}
-     <Route element={<Dashboard />} path="/dashboard" />
-     <Route element={<Allquiz />} path="/allquiz"></Route>
-     <Route element={<AllTechnology />} path="/alltech"></Route>
-     <Route element={<AddQuizTechnology />} path="/addtech"></Route>
-     <Route element={<Student />} path="/allstudent"></Route>
-     <Route element={<AddUser />} path="/adduser"></Route>
-     <Route element={<Faculty />} path="/allfaculty"></Route>
-     <Route element={<Profiles />} path="/profiles"></Route>
+     <Route element={<AdminPanel />} path="/adminpanel" />
+     <Route element={<Dashboard />} path="/adminpanel/dashboard" />
+     <Route element={<Allquiz />} path="/adminpanel/allquiz"></Route>
+     <Route element={<AllTechnology />} path="/adminpanel/alltech"></Route>
+     <Route element={<AddQuizTechnology />} path="/adminpanel/addtech"></Route>
+     <Route element={<Student />} path="/adminpanel/allstudent"></Route>
+     <Route element={<AddUser />} path="/adminpanel/adduser"></Route>
+     <Route path="/adminpanel/update-user/:id" element={<AddUser />} />
+     <Route element={<Faculty />} path="/adminpanel/allfaculty"></Route>
+     <Route element={<Profiles />} path="/adminpanel/profiles"></Route>
      {/* <---=========Route Pages Start=========---> */}
     </Routes>
    </Router>

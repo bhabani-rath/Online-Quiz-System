@@ -3,6 +3,8 @@ import profilesimg from "../assetsAdmin/profile-4.jpg";
 import Sun from "../assetsAdmin/sun.png";
 import Moon from "../assetsAdmin/moon.png";
 import LoginPageQuizApp from "../../Login/LoginPageQuizApp";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Profile = () => {
  const responsiveBtn = () => {
@@ -75,7 +77,7 @@ const Profile = () => {
      <div className="profile">
       <div className="info">
        <p>
-        Hey,<b></b>
+        Hey,<b>{}</b>
        </p>
        <small className="text-muted">Admin</small>
       </div>

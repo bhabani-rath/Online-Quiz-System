@@ -29,7 +29,7 @@ const Faculty = () => {
  };
 
  const handleUpdateUser = (id) => {
-  navigate(`/admin/update-user/${id}`);
+  navigate(`/adminpanel/update-user/${id}`);
  };
 
  const handleDeleteUser = (id) => {

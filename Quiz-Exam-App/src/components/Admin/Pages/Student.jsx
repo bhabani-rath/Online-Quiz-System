@@ -10,7 +10,7 @@ const Student = () => {
  const navigate = useNavigate();
  const [users, setUsers] = useState([]);
  const [searchTerm, setSearchTerm] = useState("");
- const [filterTechnology, setFilterTechnology] = useState("");
+ //  const [filterTechnology, setFilterTechnology] = useState("");
  const [pageIndex, setPageIndex] = useState(0);
  const [pageSize, setPageSize] = useState(10); // Default page size
  const role = "student";
@@ -29,7 +29,7 @@ const Student = () => {
  };
 
  const handleUpdateUser = (id) => {
-  navigate(`/admin/update-user/${id}`);
+  navigate(`/adminpanel/update-user/${id}`);
  };
 
  const handleDeleteUser = (id) => {
@@ -47,25 +47,18 @@ const Student = () => {
  const filteredData = useMemo(() => {
   let filteredUsers = [...users];
 
-  // Apply technology filter
-  if (filterTechnology) {
-   filteredUsers = filteredUsers.filter(
-    (quiz) => quiz.technology === filterTechnology
-   );
-  }
-
   // Apply search term filter
   if (searchTerm) {
    const lowerCaseSearchTerm = searchTerm.toLowerCase();
-   filteredUsers = filteredUsers.filter(
-    (quiz) =>
-     quiz.quizName.toLowerCase().includes(lowerCaseSearchTerm) ||
-     quiz.technology.toLowerCase().includes(lowerCaseSearchTerm)
-   );
+   filteredUsers = filteredUsers.filter((user) => {
+    user.username.toLowerCase().includes(lowerCaseSearchTerm) ||
+     user.email.toLowerCase().includes(lowerCaseSearchTerm) ||
+     user.password.toLowerCase().includes(lowerCaseSearchTerm);
+   });
   }
 
   return filteredUsers;
- }, [users, filterTechnology, searchTerm]);
+ }, [users, searchTerm]);
 
  // Calculate the number of pages correctly
  const pageCount = Math.ceil(filteredData.length / pageSize);

@@ -84,15 +84,15 @@ const Aside = () => {
     </div>
     <div className="sidebar">
      <Link
-      to="/dashboard"
-      className={location.pathname === "/dashboard" ? "active" : ""}
+      to="/adminpanel/dashboard"
+      className={location.pathname === "/adminpanel/dashboard" ? "active" : ""}
      >
       <span className="material-icons"> dashboard </span>
       <h3>Dashboard</h3>
      </Link>
      <Link
-      to="/allquiz"
-      className={location.pathname === "/allquiz" ? "active" : ""}
+      to="/adminpanel/allquiz"
+      className={location.pathname === "/adminpanel/allquiz" ? "active" : ""}
      >
       <span className="material-icons"> travel_explore </span>
       <h3>
@@ -100,8 +100,8 @@ const Aside = () => {
       </h3>
      </Link>
      <Link
-      to="/alltech"
-      className={location.pathname === "/alltech" ? "active" : ""}
+      to="/adminpanel/alltech"
+      className={location.pathname === "/adminpanel/alltech" ? "active" : ""}
      >
       <span className="material-icons"> find_in_page </span>
       <h3>
@@ -109,8 +109,8 @@ const Aside = () => {
       </h3>
      </Link>
      <Link
-      to="/allstudent"
-      className={location.pathname === "/allstudent" ? "active" : ""}
+      to="/adminpanel/allstudent"
+      className={location.pathname === "/adminpanel/allstudent" ? "active" : ""}
      >
       <span className="material-icons"> verified_user </span>
       <h3>
@@ -118,8 +118,8 @@ const Aside = () => {
       </h3>
      </Link>
      <Link
-      to="/allfaculty"
-      className={location.pathname === "/allfaculty" ? "active" : ""}
+      to="/adminpanel/allfaculty"
+      className={location.pathname === "/adminpanel/allfaculty" ? "active" : ""}
      >
       <span className="material-icons"> admin_panel_settings </span>
       <h3>
@@ -127,15 +127,15 @@ const Aside = () => {
       </h3>
      </Link>
      <Link
-      to="/adduser"
-      className={location.pathname === "/adduser" ? "active" : ""}
+      to="/adminpanel/adduser"
+      className={location.pathname === "/adminpanel/adduser" ? "active" : ""}
      >
       <span className="material-icons"> person_add </span>
       <h3>Add Users</h3>
      </Link>
      <Link
-      to="/profiles"
-      className={location.pathname === "/profiles" ? "active" : ""}
+      to="/adminpanel/profiles"
+      className={location.pathname === "/adminpanel/profiles" ? "active" : ""}
      >
       <span className="material-icons">account_circle</span>
       <h3>Profile</h3>

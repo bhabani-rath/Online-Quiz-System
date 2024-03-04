@@ -31,7 +31,7 @@ const Allquiz = () => {
    //  console.log(id);
    await axios.delete(`http://localhost:8080/api/quizzes/${id}`);
 
-   fetchQuizzes(); // Refresh the question list
+   fetchQuizzes(quizz); // Refresh the question list
   } catch (error) {
    setError("Failed to delete question");
   }

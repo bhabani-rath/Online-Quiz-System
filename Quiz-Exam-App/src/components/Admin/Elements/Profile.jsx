@@ -1,10 +1,11 @@
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
 import profilesimg from "../assetsAdmin/profile-4.jpg";
 import Sun from "../assetsAdmin/sun.png";
 import Moon from "../assetsAdmin/moon.png";
 import LoginPageQuizApp from "../../Login/LoginPageQuizApp";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
 
 const Profile = () => {
  const responsiveBtn = () => {
@@ -51,7 +52,22 @@ const Profile = () => {
   }
  };
  // Backend Connection Start
+ const [username, setUsername] = useState("");
+ const [error, setError] = useState("");
 
+ useEffect(() => {
+  fetchUsername();
+ }, []);
+ const fetchUsername = async () => {
+  try {
+   const response = await axios.get(
+    "http://localhost:8080/api/user/getUserById"
+   );
+   setUsername(response.data);
+  } catch (error) {
+   setError("Failed to load user.");
+  }
+ };
  // Backend Connection End
  return (
   <div>
@@ -77,7 +93,7 @@ const Profile = () => {
      <div className="profile">
       <div className="info">
        <p>
-        Hey,<b>{}</b>
+        Hey,<b>{username}</b>
        </p>
        <small className="text-muted">Admin</small>
       </div>

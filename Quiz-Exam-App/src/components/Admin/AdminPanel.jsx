@@ -8,7 +8,7 @@ const AdminPanel = ({ children }) => {
  useEffect(() => {
   const loadingTimeout = setTimeout(() => {
    setLoading(false);
-  }, 1000);
+  }, 500);
 
   // Clear the timeout if the component unmounts
   return () => clearTimeout(loadingTimeout);
@@ -18,10 +18,10 @@ const AdminPanel = ({ children }) => {
    {loading ? (
     // Loading screen with added loader
     <div className="loading-screen">
-     <div class="loader JS_on">
-      <span class="binary"></span>
-      <span class="binary"></span>
-      <span class="getting-there">LOADING STUFF...</span>
+     <div className="loader JS_on">
+      <span className="binary"></span>
+      <span className="binary"></span>
+      <span className="getting-there">LOADING STUFF...</span>
      </div>
     </div>
    ) : (

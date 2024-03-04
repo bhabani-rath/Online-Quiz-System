@@ -17,6 +17,7 @@ import Allquiz from "./components/Admin/Pages/Allquiz";
 import AllTechnology from "./components/Admin/Pages/AllTechnology";
 import Dashboard from "./components/Admin/Pages/Dashboard";
 import Profiles from "./components/Admin/Pages/Profiles";
+import UserResponse from "./components/Admin/Pages/UserResponse";
 
 function App() {
  //  document.addEventListener("contextmenu", function (e) {
@@ -36,9 +37,10 @@ function App() {
      <Route element={<Allquiz />} path="/adminpanel/allquiz"></Route>
      <Route element={<AllTechnology />} path="/adminpanel/alltech"></Route>
      <Route element={<Student />} path="/adminpanel/allstudent"></Route>
-     <Route element={<AddUser />} path="/adminpanel/adduser"></Route>
-     <Route path="/adminpanel/update-user/:id" element={<AddUser />} />
      <Route element={<Faculty />} path="/adminpanel/allfaculty"></Route>
+     <Route element={<AddUser />} path="/adminpanel/adduser"></Route>
+     <Route element={<AddUser />} path="/adminpanel/update-user/:id" />
+     <Route element={<UserResponse />} path="/adminpanel/userResponse"></Route>
      <Route element={<Profiles />} path="/adminpanel/profiles"></Route>
      {/* <---=========Route Pages Start=========---> */}
     </Routes>

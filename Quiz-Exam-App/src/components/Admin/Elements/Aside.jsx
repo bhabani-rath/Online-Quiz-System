@@ -134,6 +134,15 @@ const Aside = () => {
       <h3>Add Users</h3>
      </Link>
      <Link
+      to="/adminpanel/userResponse"
+      className={
+       location.pathname === "/adminpanel/userResponse" ? "active" : ""
+      }
+     >
+      <span className="material-icons"> assignment </span>
+      <h3>Users Response</h3>
+     </Link>
+     <Link
       to="/adminpanel/profiles"
       className={location.pathname === "/adminpanel/profiles" ? "active" : ""}
      >

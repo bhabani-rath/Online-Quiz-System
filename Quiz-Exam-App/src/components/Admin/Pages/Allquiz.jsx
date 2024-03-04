@@ -78,10 +78,8 @@ const Allquiz = () => {
  };
 
  // Options for page size
-  const pageSizeOptions = [5, 10, 15];
-  const handleOnClickOnSearchBar = () => {
-    
-  }
+ const pageSizeOptions = [5, 10, 15];
+ const handleOnClickOnSearchBar = () => {};
 
  return (
   <AdminPanel>
@@ -94,7 +92,6 @@ const Allquiz = () => {
        type="text"
        placeholder="🔍Search by Quiz Name or Technology"
        value={searchTerm}
-       
        onChange={(e) => setSearchTerm(e.target.value)}
       />
       {searchTerm && (
@@ -113,9 +110,9 @@ const Allquiz = () => {
        </tr>
       </thead>
       <tbody className="adminsTableBody">
-       {paginatedData.map((quiz) => (
+       {paginatedData.map((quiz, index) => (
         <tr key={quiz.id}>
-         <td>{quiz.id}</td>
+         <td>{index + 1 + pageIndex * pageSize}</td>
          <td>{quiz.quizName}</td>
          <td>{quiz.technology}</td>
          <td>

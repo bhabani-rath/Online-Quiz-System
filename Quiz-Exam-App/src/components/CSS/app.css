@@ -31,10 +31,17 @@
  --box-shadow: 0 2rem 3rem var(--color-light);
  --box-shadow-hover: 28px 28px 56px #0a0a0c, -28px -28px 56px #262a30;
 }
-.custom-toast-container {
+/*<---=========Toastify Styling Start=========---> */
+.toastBody {
  background-color: var(--color-background);
- color: var(--color-white);
+ color: var(--color-dark);
+ font-size: 1rem;
+ font-family: "Montserrat", sans-serif;
 }
+.Toastify__toast {
+ background: var(--color-background) !important;
+}
+/*<---=========Toastify Styling End=========---> */
 * {
  margin: 0;
  padding: 0;
@@ -271,6 +278,7 @@ img {
 .warning {
  color: var(--color-warning);
 }
+/* =========Sidebar========= */
 aside {
  height: 100vh;
 }
@@ -293,7 +301,6 @@ aside .logo img {
 aside .close {
  display: none;
 }
-/* =========Sidebar========= */
 aside .sidebar {
  /* background: white; */
  display: flex;
@@ -380,6 +387,23 @@ aside .sidebar .message-count {
 main {
  margin-top: 1.4rem;
  max-height: 957px;
+}
+.welcome-logo-txt {
+ display: flex;
+ flex-direction: column;
+ gap: 10px;
+ align-items: center;
+ justify-content: center;
+}
+.welcome-logo-txt img {
+ width: 18.8rem;
+ height: 12.8rem;
+ border-radius: 50%;
+ -webkit-border-radius: 50%;
+ -moz-border-radius: 50%;
+ -ms-border-radius: 50%;
+ -o-border-radius: 50%;
+ overflow: hidden;
 }
 main .insights {
  display: grid;
@@ -943,10 +967,18 @@ main table tbody tr td button:hover {
  border: none;
  outline: none;
  padding-left: 25px;
+ position: absolute;
  -webkit-border-radius: 0.75rem;
  -moz-border-radius: 0.75rem;
  -ms-border-radius: 0.75rem;
  -o-border-radius: 0.75rem;
+}
+.input-password-addUser i {
+ margin-top: 20px;
+ position: sticky;
+ margin-left: 460px;
+ color: var(--color-dark);
+ cursor: pointer;
 }
 .role-chooser select {
  appearance: none;
@@ -1024,7 +1056,149 @@ main table tbody tr td button:hover {
  -ms-border-radius: 0.9375em;
  -o-border-radius: 0.9375em;
 }
-.button-addorupdate button[type="submit"]{
-    margin-top: 12px;
+.button-addorupdate button[type="submit"] {
+ margin-top: 12px;
 }
 /*<---=========Add or Update User End=========---> */
+.loading-screen {
+ display: flex;
+ flex-direction: column;
+ justify-content: center;
+ align-items: center;
+ width: 100vw;
+ height: 100vh;
+ background-color: var(--color-light);
+}
+.loader {
+ width: 130px;
+ height: 170px;
+ position: relative;
+ font-family: inherit;
+}
+
+.loader::before,
+.loader::after {
+ content: "";
+ width: 0;
+ height: 0;
+ position: absolute;
+ bottom: 30px;
+ left: 15px;
+ z-index: 1;
+ border-left: 50px solid transparent;
+ border-right: 50px solid transparent;
+ border-bottom: 20px solid #1b2a33;
+ transform: scale(0);
+ transition: all 0.2s ease;
+}
+
+.loader::after {
+ border-right: 15px solid transparent;
+ border-bottom: 20px solid #162229;
+}
+
+.loader .getting-there {
+ width: 120%;
+ text-align: center;
+ position: absolute;
+ bottom: 0;
+ left: -7%;
+ font-size: 12px;
+ letter-spacing: 2px;
+ color: var(--color-dark);
+}
+
+.loader .binary {
+ width: 100%;
+ height: 140px;
+ display: block;
+ color: var(--color-dark);
+ position: absolute;
+ top: 0;
+ left: 15px;
+ z-index: 2;
+ overflow: hidden;
+}
+
+.loader .binary::before,
+.loader .binary::after {
+ font-family: "Lato";
+ font-size: 24px;
+ position: absolute;
+ top: 0;
+ left: 0;
+ opacity: 0;
+}
+
+.loader .binary:nth-child(1)::before {
+ content: "0";
+ animation: a 1.1s linear infinite;
+}
+
+.loader .binary:nth-child(1)::after {
+ content: "0";
+ animation: b 1.3s linear infinite;
+}
+
+.loader .binary:nth-child(2)::before {
+ content: "1";
+ animation: c 0.9s linear infinite;
+}
+
+.loader .binary:nth-child(2)::after {
+ content: "1";
+ animation: d 0.7s linear infinite;
+}
+
+.loader.JS_on::before,
+.loader.JS_on::after {
+ transform: scale(1);
+}
+
+@keyframes a {
+ 0% {
+  transform: translate(30px, 0) rotate(30deg);
+  opacity: 0;
+ }
+
+ 100% {
+  transform: translate(30px, 150px) rotate(-50deg);
+  opacity: 1;
+ }
+}
+
+@keyframes b {
+ 0% {
+  transform: translate(50px, 0) rotate(-40deg);
+  opacity: 0;
+ }
+
+ 100% {
+  transform: translate(40px, 150px) rotate(80deg);
+  opacity: 1;
+ }
+}
+
+@keyframes c {
+ 0% {
+  transform: translate(70px, 0) rotate(10deg);
+  opacity: 0;
+ }
+
+ 100% {
+  transform: translate(60px, 150px) rotate(70deg);
+  opacity: 1;
+ }
+}
+
+@keyframes d {
+ 0% {
+  transform: translate(30px, 0) rotate(-50deg);
+  opacity: 0;
+ }
+
+ 100% {
+  transform: translate(45px, 150px) rotate(30deg);
+  opacity: 1;
+ }
+}

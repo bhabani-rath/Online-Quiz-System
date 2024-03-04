@@ -105,9 +105,9 @@ const AllTechnology = () => {
        </tr>
       </thead>
       <tbody className="adminsTableBody">
-       {paginatedData.map((quiz) => (
+       {paginatedData.map((quiz, index) => (
         <tr key={quiz.id}>
-         <td>{quiz.id}</td>
+         <td>{index + 1 + pageIndex * pageSize}</td>
          <td>{quiz.technology}</td>
          <td>
           <button

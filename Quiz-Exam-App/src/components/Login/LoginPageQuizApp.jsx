@@ -194,7 +194,7 @@ const LoginPageQuizApp = () => {
      <p className="p2">
       Unlock Knowledge, Embrace Fun <br /> Welcome to Quizzify!
      </p>
-     <form className="main-form">
+     <form className="main-form" onSubmit={handleKeyDown}>
       <div className="div-inp1">
        <input
         type="text"
@@ -257,10 +257,11 @@ const LoginPageQuizApp = () => {
     pauseOnFocusLoss
     draggable
     pauseOnHover
-    theme="dark"
     transition:slide
     toastContainerClassName="custom-toast-container"
     limit="5"
+    bodyClassName="toastBody"
+    progressClassName="toastBody"
    />
   </>
  );

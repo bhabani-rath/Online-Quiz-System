@@ -12,12 +12,13 @@ import "react-toastify/dist/ReactToastify.css";
 import "../../CSS/app.css";
 
 const AddUser = () => {
- const toastTheme = {
-  backgroundColor: "var(--color-background)",
-  color: "var(--color-white)"
- };
+ // Camel Case of Any Word Start
+ function capitalizeFirstLetter(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+ }
+ // Camel Case of Any Word End
  /*<---=========Backend Start=========---> */
- const [role, setRole] = useState("faculty");
+ const [role, setRole] = useState("");
  const [email, setEmail] = useState("");
  const [password, setPassword] = useState("");
  const [username, setUsername] = useState("");
@@ -37,9 +38,9 @@ const AddUser = () => {
 
  const pageTitle = () => {
   if (id) {
-   return <h1 className="text-center">Update User</h1>;
+   return <p className="text-center">Update User</p>;
   } else {
-   return <h1 className="text-center">Add User</h1>;
+   return <p className="text-center">Add User</p>;
   }
  };
  const pageTitles = () => {
@@ -58,7 +59,7 @@ const AddUser = () => {
    UpdateUser(user, id)
     .then((response) => {
      console.log(response.data);
-     navigate("/admin/viewusers");
+     toast.success(`${capitalizeFirstLetter(role)} Updated Successfully`);
     })
     .catch((error) => {
      toast.error("Error updating user");
@@ -71,7 +72,7 @@ const AddUser = () => {
      setEmail("");
      setPassword("");
      setUsername("");
-     setRole("faculty");
+     setRole("");
 
      if (response.status === 200) {
       toast.success(`New ${role} Added Successfully`);
@@ -99,18 +100,38 @@ const AddUser = () => {
   setPassword("");
   setEmail("");
  };
-
+ //handleShowPassword for Change the Type of Text in Password Field
+ const [show, setShow] = useState(false);
+ const [type, settype] = useState("password");
+ const handleShowPassword = () => {
+  console.log("Before: show =", show);
+  if (!show) {
+   setShow(true);
+   settype("text");
+   console.log("After (visible): show =", show);
+   toast.warn("Password is Visible🙉", {
+    autoClose: 1000
+   });
+  } else {
+   setShow(false);
+   settype("password");
+   console.log("After (hidden): show =", show);
+   toast.success("Password is Protected🙈", {
+    autoClose: 1000
+   });
+  }
+ };
  return (
   <AdminPanel>
    <main>
     <h1>{pageTitle()}</h1>
     <div className="form-addorupdate">
      <div className="div-adduserform">
-      <form className="form-section" onSubmit={saveOrUpdate}>
-       <p className="p3" style={{ fontSize: "1.9rem", fontWeight: "500" }}>
-        {pageTitle()}
-       </p>
-       <p className="p2">{pageTitles()}</p>
+      <form className="form-section">
+       <h1 className="p1">{pageTitle()}</h1>
+       <h2 className="p3" style={{ fontWeight: "500" }}>
+        {pageTitles()}
+       </h2>
        <div className="input-mail-addUser">
         <input
          type="email"
@@ -139,7 +160,7 @@ const AddUser = () => {
        </div>
        <div className="input-password-addUser">
         <input
-         type="password"
+         type={type}
          name="password"
          id="adduser-inp-3"
          className="adduser-inp-3"
@@ -147,7 +168,14 @@ const AddUser = () => {
          value={password}
          onChange={(e) => setPassword(e.target.value)}
          required
-        />
+        />{" "}
+        <div onClick={handleShowPassword}>
+         {show ? (
+          <i className="fa-solid fa-eye"></i>
+         ) : (
+          <i className="fa-solid fa-eye-slash"></i>
+         )}
+        </div>
        </div>
        <div className="role-chooser">
         <select
@@ -173,7 +201,7 @@ const AddUser = () => {
         </select>
        </div>
        <div className="button-addorupdate">
-        <button className="btn-user-1" type="submit">
+        <button className="btn-user-1" type="submit" onClick={saveOrUpdate}>
          Submit
         </button>
         <button className="btn-user-2" type="reset" onClick={resetForm}>
@@ -194,9 +222,10 @@ const AddUser = () => {
     pauseOnFocusLoss
     draggable
     pauseOnHover
-    theme={toastTheme}
     transition:slide
     limit="5"
+    bodyClassName="toastBody"
+    progressClassName="toastBody"
    />
   </AdminPanel>
  );

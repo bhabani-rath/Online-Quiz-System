@@ -10,7 +10,7 @@ const Faculty = () => {
  const navigate = useNavigate();
  const [users, setUsers] = useState([]);
  const [searchTerm, setSearchTerm] = useState("");
- const [filterTechnology, setFilterTechnology] = useState("");
+ //  const [filterTechnology, setFilterTechnology] = useState("");
  const [pageIndex, setPageIndex] = useState(0);
  const [pageSize, setPageSize] = useState(10); // Default page size
  const role = "faculty";
@@ -47,25 +47,19 @@ const Faculty = () => {
  const filteredData = useMemo(() => {
   let filteredUsers = [...users];
 
-  // Apply technology filter
-  if (filterTechnology) {
-   filteredUsers = filteredUsers.filter(
-    (quiz) => quiz.technology === filterTechnology
-   );
-  }
-
   // Apply search term filter
   if (searchTerm) {
    const lowerCaseSearchTerm = searchTerm.toLowerCase();
    filteredUsers = filteredUsers.filter(
-    (quiz) =>
-     quiz.quizName.toLowerCase().includes(lowerCaseSearchTerm) ||
-     quiz.technology.toLowerCase().includes(lowerCaseSearchTerm)
+    (user) =>
+     user.username.toLowerCase().includes(lowerCaseSearchTerm) ||
+     user.email.toLowerCase().includes(lowerCaseSearchTerm) ||
+     user.password.toLowerCase().includes(lowerCaseSearchTerm)
    );
   }
 
   return filteredUsers;
- }, [users, filterTechnology, searchTerm]);
+ }, [users, searchTerm]);
 
  // Calculate the number of pages correctly
  const pageCount = Math.ceil(filteredData.length / pageSize);
@@ -89,11 +83,11 @@ const Faculty = () => {
   <AdminPanel>
    <main>
     <div className="recent-orders">
-     <h1>Student Details</h1>
+     <h1>Faculty Details</h1>
      <div className="filters">
       <input
        type="text"
-       placeholder="🔍Search by Quiz Name or Technology"
+       placeholder="🔍Search by user Name or Technology"
        value={searchTerm}
        onChange={(e) => setSearchTerm(e.target.value)}
       />
@@ -114,9 +108,9 @@ const Faculty = () => {
        </tr>
       </thead>
       <tbody className="adminsTableBody">
-       {paginatedData.map((user) => (
+       {paginatedData.map((user, index) => (
         <tr key={user.id}>
-         <td>{user.id}</td>
+         <td>{index + 1 + pageIndex * pageSize}</td>
          <td>{user.username}</td>
          <td>{user.email}</td>
          <td>{user.password}</td>

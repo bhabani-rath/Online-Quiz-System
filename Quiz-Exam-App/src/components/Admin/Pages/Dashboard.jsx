@@ -1,9 +1,10 @@
 import { React, useState, useEffect } from "react";
 import AdminPanel from "../AdminPanel";
-import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { CategorySelectUser } from "../../Services/UserService";
 import AdminDetails from "../../TableData/AdminDetails";
 import axios from "axios";
+import logo from "../assetsAdmin/questprobelogo.svg";
 
 const Dashboard = () => {
  // Backend Connection Start
@@ -14,6 +15,8 @@ const Dashboard = () => {
  const [ques, setQues] = useState(0);
  const [quiz, setQuiz] = useState(0);
  const [tech, setTech] = useState([]);
+ const [admin, setAdmin] = useState("");
+ const [username, setUsername] = useState("");
 
  useEffect(() => {
   getalluser();
@@ -37,7 +40,14 @@ const Dashboard = () => {
     // console.log(response.data);
    })
    .catch((error) => console.log(error));
-
+  role = "admin";
+  CategorySelectUser(role)
+   .then((response) => {
+    setUser(response.data);
+    setAdmin(response.data.length);
+    // console.log(response.data);
+   })
+   .catch((error) => console.log(error));
   try {
    const response = await axios.get(
     "http://localhost:8080/api/questions/getAllQuestion"
@@ -47,7 +57,6 @@ const Dashboard = () => {
   } catch (error) {
    setError("Failed to fetch questions");
   }
-
   try {
    const response = await axios.get("http://localhost:8080/api/quizzes");
    setQuiz(response.data.length);
@@ -62,17 +71,38 @@ const Dashboard = () => {
    setError("Failed to fetch user responses");
   }
  };
+ const getcurrenttime = () => {
+  var Time = new Date();
+  return Time.getHours();
+ };
 
- console.log(student);
- console.log(teacher);
- console.log(user);
- console.log(error);
+ const getgreeting = () => {
+  var time = getcurrenttime();
+  var greeting = "";
+  if (time > 4 && time < 12) greeting = "Morning";
+  else if (time >= 12 && time < 16) greeting = "Afternoon";
+  else if (time >= 16 && time < 20) greeting = "Evening";
+  else greeting = "Night";
+
+  return "Good " + greeting;
+ };
+ //  console.log(student);
+ //  console.log(teacher);
+ //  console.log(user);
+ //  console.log(error);
  // Backend Connection End
  return (
   <AdminPanel>
    {/* <!-- =========Start of Main========= --> */}
    <main>
     <h1>Dashboard</h1>
+    <div className="welcome-logo-txt">
+     <img src={logo} alt="error" />
+     <h1>
+      QUEST
+      <span className="primary">PROBE</span>
+     </h1>
+    </div>
     <div className="insights">
      {/* <!-- =========Start of Total Quizzes Created========= --> */}
      <div className="total-quiz">
@@ -134,48 +164,20 @@ const Dashboard = () => {
       <small className="text-muted">Last 24 Hours</small>
      </div>
      {/* <!-- =========End of Total Students Created========= --> */}
+     {/* <!-- =========Start of Total Students Created========= --> */}
+     <div className="total-facstu">
+      <span className="material-icons">security</span>
+      <div className="middle">
+       <div className="left">
+        <h3>Total Admins Connected</h3>
+        <h1>{admin}</h1>
+       </div>
+      </div>
+      <small className="text-muted">Last 24 Hours</small>
+     </div>
+     {/* <!-- =========End of Total Students Created========= --> */}
     </div>
     {/* <!-- =========End of Insights========= --> */}
-    {/* <!-- =========Start of All Admins Table========= --> */}
-    <div className="recent-orders">
-     <h2>Faculties</h2>
-     <table>
-      <thead>
-       <tr>
-        <th>Sl No.</th>
-        <th>Admin Name</th>
-        <th>Email</th>
-        <th>Contact Number</th>
-        <th>Actions</th>
-       </tr>
-      </thead>
-      <tbody id="adminsTableBody">
-       {AdminDetails.map((AdminDetails) => (
-        <tr key={AdminDetails.slno}>
-         <td>{AdminDetails.slno}</td>
-         <td>{AdminDetails.adminName}</td>
-         <td>{AdminDetails.adminEmail}</td>
-         <td>{AdminDetails.contactNumber}</td>
-         <td>
-          <button
-           type="submit"
-           style={{
-            cursor: "pointer",
-            border: "none",
-            padding: "5px 5px 5px 5px"
-           }}
-          >
-           <Link className="primary" to="/profile">
-            Details
-           </Link>
-          </button>
-         </td>
-        </tr>
-       ))}
-      </tbody>
-     </table>
-    </div>
-    {/* <!-- =========End of All Admins Table========= --> */}
    </main>
    {/* <!-- =========End of Main========= --> */}
    <h6

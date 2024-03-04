@@ -10,7 +10,6 @@ import AdminPanel from "./components/Admin/AdminPanel";
 import Aside from "./components/Admin/Elements/Aside";
 import Profile from "./components/Admin/Elements/Profile";
 /*<---=========Import Admin/Pages=========---> */
-import AddQuizTechnology from "./components/Admin/Pages/AddQuizTechnology";
 import AddUser from "./components/Admin/Pages/AddUser";
 import Faculty from "./components/Admin/Pages/Faculty";
 import Student from "./components/Admin/Pages/Student";
@@ -36,7 +35,6 @@ function App() {
      <Route element={<Dashboard />} path="/adminpanel/dashboard" />
      <Route element={<Allquiz />} path="/adminpanel/allquiz"></Route>
      <Route element={<AllTechnology />} path="/adminpanel/alltech"></Route>
-     <Route element={<AddQuizTechnology />} path="/adminpanel/addtech"></Route>
      <Route element={<Student />} path="/adminpanel/allstudent"></Route>
      <Route element={<AddUser />} path="/adminpanel/adduser"></Route>
      <Route path="/adminpanel/update-user/:id" element={<AddUser />} />

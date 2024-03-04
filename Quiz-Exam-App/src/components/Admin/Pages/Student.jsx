@@ -3,6 +3,8 @@ import AdminPanel from "../AdminPanel";
 import { useNavigate } from "react-router-dom";
 import { CategorySelectUser, DeleteUser } from "../../Services/UserService";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Student = () => {
  /*<---=========Backend Start=========---> */
@@ -50,11 +52,12 @@ const Student = () => {
   // Apply search term filter
   if (searchTerm) {
    const lowerCaseSearchTerm = searchTerm.toLowerCase();
-   filteredUsers = filteredUsers.filter((user) => {
-    user.username.toLowerCase().includes(lowerCaseSearchTerm) ||
+   filteredUsers = filteredUsers.filter(
+    (user) =>
+     user.username.toLowerCase().includes(lowerCaseSearchTerm) ||
      user.email.toLowerCase().includes(lowerCaseSearchTerm) ||
-     user.password.toLowerCase().includes(lowerCaseSearchTerm);
-   });
+     user.password.toLowerCase().includes(lowerCaseSearchTerm)
+   );
   }
 
   return filteredUsers;
@@ -107,9 +110,9 @@ const Student = () => {
        </tr>
       </thead>
       <tbody className="adminsTableBody">
-       {paginatedData.map((user) => (
+       {paginatedData.map((user, index) => (
         <tr key={user.id}>
-         <td>{user.id}</td>
+         <td>{index + 1 + pageIndex * pageSize}</td>
          <td>{user.username}</td>
          <td>{user.email}</td>
          <td>{user.password}</td>
@@ -161,6 +164,22 @@ const Student = () => {
      </div>
     </div>
    </main>
+   <ToastContainer
+    position="top-right"
+    autoClose={1000}
+    hideProgressBar={false}
+    newestOnTop={true}
+    closeOnClick
+    rtl={false}
+    pauseOnFocusLoss
+    draggable
+    pauseOnHover
+    transition:slide
+    toastContainerClassName="custom-toast-container"
+    limit="5"
+    bodyClassName="toastBody"
+    progressClassName="toastBody"
+   />
   </AdminPanel>
  );
 };

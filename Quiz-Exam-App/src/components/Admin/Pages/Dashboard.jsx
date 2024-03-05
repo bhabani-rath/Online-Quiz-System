@@ -6,7 +6,7 @@ import AdminDetails from "../../TableData/AdminDetails";
 import axios from "axios";
 import logo from "../assetsAdmin/questprobelogo.svg";
 
-const Dashboard = () => {
+const Dashboard = ({ usersname, role }) => {
  // Backend Connection Start
  const [user, setUser] = useState([]);
  const [teacher, setTeacher] = useState(0);

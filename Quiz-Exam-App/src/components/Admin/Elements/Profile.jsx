@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from "react";
+import React from "react";
 import profilesimg from "../assetsAdmin/profile-4.jpg";
 import Sun from "../assetsAdmin/sun.png";
 import Moon from "../assetsAdmin/moon.png";
@@ -6,8 +6,9 @@ import LoginPageQuizApp from "../../Login/LoginPageQuizApp";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
+import { useLocation } from "react-router-dom";
 
-const Profile = () => {
+const Profile = ({ username, role }) => {
  const responsiveBtn = () => {
   const sideMenu = document.querySelector("aside");
   const menuBtn = document.getElementById("menu-btn");
@@ -51,24 +52,7 @@ const Profile = () => {
    moons.style.cursor = "pointer";
   }
  };
- // Backend Connection Start
- const [username, setUsername] = useState("");
- const [error, setError] = useState("");
 
- useEffect(() => {
-  fetchUsername();
- }, []);
- const fetchUsername = async () => {
-  try {
-   const response = await axios.get(
-    "http://localhost:8080/api/user/getUserById"
-   );
-   setUsername(response.data);
-  } catch (error) {
-   setError("Failed to load user.");
-  }
- };
- // Backend Connection End
  return (
   <div>
    {/* <!-- =========Start of last========= --> */}
@@ -93,9 +77,9 @@ const Profile = () => {
      <div className="profile">
       <div className="info">
        <p>
-        Hey,<b>{username}</b>
+        Hey, <b>{username}</b>
        </p>
-       <small className="text-muted">Admin</small>
+       <small className="text-muted">{role}</small>
       </div>
       <div className="profile-photo">
        <img src={profilesimg} alt="Error-69" />

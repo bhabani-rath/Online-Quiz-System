@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "../CSS/app.css";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
@@ -41,7 +41,7 @@ const LoginPageQuizApp = () => {
  //Tostify for Username Input Field
  const uname = () => {
   if (username == "") {
-   toast("Enter Your Username Provided Through Email.", {
+   toast("Enter Your Username.", {
     autoClose: 1000,
     type: "info"
    });
@@ -55,7 +55,7 @@ const LoginPageQuizApp = () => {
  //Tostify for Password Input Field
  const pass = () => {
   if (password == "") {
-   toast("Enter Your Password Provided Through Email.", {
+   toast("Enter Your Password.", {
     autoClose: 1000,
     type: "info"
    });
@@ -115,16 +115,12 @@ const LoginPageQuizApp = () => {
      `Welcome ${username} to ${capitalizeFirstLetter(role.role)} Panel`,
      {
       onClose: () => {
-       navigate("/adminpanel/dashboard"),
-        {
-         state: {
-          username: username,
-          userid: role.id
-         }
-        };
-      }
-     },
-     { autoClose: 500 }
+       navigate("/adminpanel/dashboard", {
+        state: { username: username, role: role.role }
+       });
+      },
+      autoClose: 500
+     }
     );
    } else if (role.role === "student") {
     toast(
@@ -173,13 +169,25 @@ const LoginPageQuizApp = () => {
  };
  // Backend Connection End
  // Hit Enter Button to Login
- const handleKeyDown = (event) => {
-  if (event.key === "Enter") {
-   event.preventDefault();
-   // If the Enter key is pressed, trigger the login action
-   handleSubmit();
-  }
- };
+ useEffect(() => {
+  const handleKeyUp = (e) => {
+   if (e.key === "Enter") {
+    handleSubmit();
+   }
+  };
+
+  const inputElement = document.getElementById("inpt2");
+  const inputElement1 = document.getElementById("inpt2");
+  inputElement.addEventListener("keyup", handleKeyUp);
+  inputElement1.addEventListener("keyup", handleKeyUp);
+
+  // Cleanup the event listener on component unmount
+  return () => {
+   inputElement.removeEventListener("keyup", handleKeyUp);
+   inputElement1.removeEventListener("keyup", handleKeyUp);
+  };
+ }, []);
+
  //Design Part of Website
  return (
   <>
@@ -194,7 +202,7 @@ const LoginPageQuizApp = () => {
      <p className="p2">
       Unlock Knowledge, Embrace Fun <br /> Welcome to Quizzify!
      </p>
-     <form className="main-form" onSubmit={handleKeyDown}>
+     <form className="main-form">
       <div className="div-inp1">
        <input
         type="text"
@@ -220,7 +228,6 @@ const LoginPageQuizApp = () => {
         value={password}
         onClick={pass}
         onChange={(e) => setPassword(e.target.value)}
-        onKeyDownCapture={handleKeyDown}
        />
        <div onClick={handleShowPassword}>
         {show ? (

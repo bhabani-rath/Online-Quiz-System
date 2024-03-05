@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Aside from "./Elements/Aside";
 import Profile from "./Elements/Profile";
+import { useLocation } from "react-router-dom";
 
 const AdminPanel = ({ children }) => {
  const [loading, setLoading] = useState(true);
@@ -13,6 +14,8 @@ const AdminPanel = ({ children }) => {
   // Clear the timeout if the component unmounts
   return () => clearTimeout(loadingTimeout);
  }, []); // Empty dependency array ensures the effect runs only once
+ const { state } = useLocation();
+ const { username, role } = state || {};
  return (
   <>
    {loading ? (
@@ -28,8 +31,10 @@ const AdminPanel = ({ children }) => {
     // Content when loading is complete
     <div className="containers">
      <Aside />
-     <div>{children}</div>
-     <Profile />
+     <div username={username} role={role}>
+      {children}
+     </div>
+     <Profile username={username} role={role} />
     </div>
    )}
   </>

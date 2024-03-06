@@ -128,11 +128,12 @@ const LoginPageQuizApp = () => {
      { autoClose: 500, type: "success" },
      {
       onClose: () => {
-       navigate("/adminpanel/dashboard"),
+       navigate("/studentpanel/studentdashboard"),
         {
          state: {
           username: username,
-          userid: role.id
+          userid: role.id,
+          role: role.role
          }
         };
       }
@@ -144,11 +145,12 @@ const LoginPageQuizApp = () => {
      { autoClose: 500, type: "success" },
      {
       onClose: () => {
-       navigate("/adminpanel/dashboard"),
+       navigate("/facultypanel/facultydashboard"),
         {
          state: {
           username: username,
-          userid: role.id
+          userid: role.id,
+          role: role.role
          }
         };
       }

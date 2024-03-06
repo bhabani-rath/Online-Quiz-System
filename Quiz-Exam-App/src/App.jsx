@@ -18,6 +18,17 @@ import AllTechnology from "./components/Admin/Pages/AllTechnology";
 import Dashboard from "./components/Admin/Pages/Dashboard";
 import Profiles from "./components/Admin/Pages/Profiles";
 import UserResponse from "./components/Admin/Pages/UserResponse";
+/*<---=========Import Faculty=========---> */
+import FacultyPanel from "./components/Faculty/FacultyPanel";
+/*<---=========Import Faculty/Elements=========---> */
+import AsideFaculty from "./components/Faculty/Elements/AsideFaculty";
+/*<---=========Import Faculty/Pages=========---> */
+import FacultyDashboard from "./components/Faculty/Pages/FacultyDashboard";
+import AllTechs from "./components/Faculty/Pages/AllTechs";
+import Students from "./components/Faculty/Pages/Students";
+import GenerateQuiz from "./components/Faculty/Pages/GenerateQuiz";
+import GenerateQuestion from "./components/Faculty/Pages/GenerateQuestion";
+import FacultyProfile from "./components/Faculty/Pages/FacultyProfile";
 
 function App() {
  //  document.addEventListener("contextmenu", function (e) {
@@ -27,10 +38,14 @@ function App() {
   <>
    <Router>
     <Routes>
-     <Route element={<LoginPageQuizApp />} path="/" />
-     <Route element={<Aside />} path="/aside" />
-     <Route element={<Profile />} path="/profile" />
+     {/*<---=========Import LandPage=========---> */}
      <Route element={<LandPage />} path="/landpage"></Route>
+     {/*<---=========Import Login=========---> */}
+     <Route element={<LoginPageQuizApp />} path="/" />
+     {/*<---=========Import Admin/Elements=========---> */}
+     <Route element={<Aside />} path="/aside" />
+     <Route element={<Profile />} path="/profile" />{" "}
+     {/*<Profile/> is same and used for Admin,Faculty and Student Panel.*/}
      {/* <---=========Admin Panel Route Pages Start=========---> */}
      <Route element={<AdminPanel />} path="/adminpanel" />
      <Route element={<Dashboard />} path="/adminpanel/dashboard" />
@@ -42,7 +57,31 @@ function App() {
      <Route element={<AddUser />} path="/adminpanel/update-user/:id" />
      <Route element={<UserResponse />} path="/adminpanel/userResponse"></Route>
      <Route element={<Profiles />} path="/adminpanel/profiles"></Route>
-     {/* <---=========Route Pages Start=========---> */}
+     {/* <---=========Admin Route Pages End=========---> */}
+     {/* <---=========Faculty Route Elements Start=========---> */}
+     <Route element={<AsideFaculty />}></Route>
+     {/* <---=========Faculty Route Elements End=========---> */}
+     {/* <---=========Faculty Route Pages Start=========---> */}
+     <Route element={<FacultyPanel />} path="/facultypanel"></Route>
+     <Route
+      element={<FacultyDashboard />}
+      path="/facultypanel/facultydashboard"
+     ></Route>
+     <Route element={<AllTechs />} path="/facultypanel/alltechs"></Route>
+     <Route element={<Students />} path="/facultypanel/allstudent"></Route>
+     <Route
+      element={<GenerateQuiz />}
+      path="/facultypanel/generatequiz"
+     ></Route>
+     <Route
+      element={<GenerateQuestion />}
+      path="/facultypanel/generatequestion"
+     ></Route>
+     <Route
+      element={<FacultyProfile />}
+      path="/facultypanel/facultyprofile"
+     ></Route>
+     {/* <---=========Faculty Route Pages End=========---> */}
     </Routes>
    </Router>
   </>

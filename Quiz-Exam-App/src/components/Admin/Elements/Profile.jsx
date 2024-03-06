@@ -52,7 +52,16 @@ const Profile = ({ username, role }) => {
    moons.style.cursor = "pointer";
   }
  };
-
+ const roleManager = () => {
+  if (location.pathname === "/adminpanel/dashboard") {
+   <small className="text-muted">Admin</small>;
+  } else if (location.pathname === "/facultypanel/dashboard") {
+   <small className="text-muted">Faculty</small>;
+  } else {
+   <small className="text-muted">Student</small>;
+  }
+  // add more conditions as needed
+ };
  return (
   <div>
    {/* <!-- =========Start of last========= --> */}
@@ -77,9 +86,9 @@ const Profile = ({ username, role }) => {
      <div className="profile">
       <div className="info">
        <p>
-        Hey, <b>{username}</b>
+        Hey, <b>Bhabani07</b>
        </p>
-       <small className="text-muted">{role}</small>
+       <small className="text-muted">Role</small>
       </div>
       <div className="profile-photo">
        <img src={profilesimg} alt="Error-69" />

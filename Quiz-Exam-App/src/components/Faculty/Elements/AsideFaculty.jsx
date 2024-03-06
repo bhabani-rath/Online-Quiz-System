@@ -1,10 +1,10 @@
 import { React, useState, useEffect } from "react";
-import logo from "../assetsAdmin/questprobelogo.svg";
+import logo from "../assetsFaculty/questprobelogo.svg";
 import { Link } from "react-router-dom";
 import { CategorySelectUser } from "../../Services/UserService";
 import axios from "axios";
 
-const Aside = () => {
+const AsideFaculty = () => {
  // Backend Connection Start
  const [user, setUser] = useState([]);
  const [teacher, setTeacher] = useState(0);
@@ -24,7 +24,7 @@ const Aside = () => {
    .then((response) => {
     setUser(response.data);
     setStudent(response.data.length);
-    console.log(response.data);
+    // console.log(response.data);
    })
    .catch((error) => console.log(error));
 
@@ -33,7 +33,7 @@ const Aside = () => {
    .then((response) => {
     setUser(response.data);
     setTeacher(response.data.length);
-    console.log(response.data);
+    // console.log(response.data);
    })
    .catch((error) => console.log(error));
 
@@ -42,7 +42,7 @@ const Aside = () => {
     "http://localhost:8080/api/questions/getAllQuestion"
    );
    setQues(response.data.length);
-   console.log("Question: " + response.data);
+   //    console.log("Question: " + response.data);
   } catch (error) {
    setError("Failed to fetch questions");
   }
@@ -50,7 +50,7 @@ const Aside = () => {
   try {
    const response = await axios.get("http://localhost:8080/api/quizzes");
    setQuiz(response.data.length);
-   console.log("Quizz: " + response.data);
+   //    console.log("Quizz: " + response.data);
   } catch (error) {
    setError("Failed to fetch quizz");
   }
@@ -84,33 +84,28 @@ const Aside = () => {
     </div>
     <div className="sidebar">
      <Link
-      to="/adminpanel/dashboard"
-      className={location.pathname === "/adminpanel/dashboard" ? "active" : ""}
+      to="/facultypanel/facultydashboard"
+      className={
+       location.pathname === "/facultypanel/facultydashboard" ? "active" : ""
+      }
      >
       <span className="material-icons"> dashboard </span>
       <h3>Dashboard</h3>
      </Link>
      <Link
-      to="/adminpanel/allquiz"
-      className={location.pathname === "/adminpanel/allquiz" ? "active" : ""}
-     >
-      <span className="material-icons"> travel_explore </span>
-      <h3>
-       Quizzes <span className="message-count">{quiz}</span>
-      </h3>
-     </Link>
-     <Link
-      to="/adminpanel/alltech"
-      className={location.pathname === "/adminpanel/alltech" ? "active" : ""}
+      to="/facultypanel/alltechs"
+      className={location.pathname === "/facultypanel/alltech" ? "active" : ""}
      >
       <span className="material-icons"> find_in_page </span>
       <h3>
-       Techs <span className="message-count">{tech}</span>
+       Techs <span className="message-count">40+</span>
       </h3>
      </Link>
      <Link
-      to="/adminpanel/allstudent"
-      className={location.pathname === "/adminpanel/allstudent" ? "active" : ""}
+      to="/facultypanel/allstudent"
+      className={
+       location.pathname === "/facultypanel/allstudent" ? "active" : ""
+      }
      >
       <span className="material-icons"> verified_user </span>
       <h3>
@@ -118,33 +113,28 @@ const Aside = () => {
       </h3>
      </Link>
      <Link
-      to="/adminpanel/allfaculty"
-      className={location.pathname === "/adminpanel/allfaculty" ? "active" : ""}
-     >
-      <span className="material-icons"> admin_panel_settings </span>
-      <h3>
-       Faculties <span className="message-count">{teacher}</span>
-      </h3>
-     </Link>
-     <Link
-      to="/adminpanel/adduser"
-      className={location.pathname === "/adminpanel/adduser" ? "active" : ""}
-     >
-      <span className="material-icons"> person_add </span>
-      <h3>Add Users</h3>
-     </Link>
-     <Link
-      to="/adminpanel/userResponse"
+      to="/facultypanel/generatequiz"
       className={
-       location.pathname === "/adminpanel/userResponse" ? "active" : ""
+       location.pathname === "/facultypanel/generatequiz" ? "active" : ""
       }
      >
-      <span className="material-icons"> assignment </span>
-      <h3>Users Response</h3>
+      <span className="material-icons"> tips_and_updates </span>
+      <h3>Generate Quiz</h3>
      </Link>
      <Link
-      to="/adminpanel/profiles"
-      className={location.pathname === "/adminpanel/profiles" ? "active" : ""}
+      to="/facultypanel/generatequestion"
+      className={
+       location.pathname === "/facultypanel/generatequestion" ? "active" : ""
+      }
+     >
+      <span className="material-icons"> post_add </span>
+      <h3>Generate Question</h3>
+     </Link>
+     <Link
+      to="/facultypanel/facultyprofile"
+      className={
+       location.pathname === "/facultypanel/facultyprofile" ? "active" : ""
+      }
      >
       <span className="material-icons">account_circle</span>
       <h3>Profile</h3>
@@ -160,4 +150,4 @@ const Aside = () => {
  );
 };
 
-export default Aside;
+export default AsideFaculty;

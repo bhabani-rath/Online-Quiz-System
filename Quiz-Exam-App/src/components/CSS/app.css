@@ -21,6 +21,7 @@
  --padding-1: 1.2rem;
  --box-shadow: 0 2rem 3rem var(--color-light);
  --box-shadow-hover: 17px 15px 32px 7px rgba(163, 163, 163, 1);
+ --box-shadow-button: 17px 15px 32px 7px rgba(163, 163, 163, 1);
 }
 [data-theme="dark"] {
  --color-background: #181a1e;
@@ -1335,6 +1336,11 @@ main table tbody tr td button:hover {
 }
 .form-addques:hover {
  box-shadow: var(--box-shadow-hover);
+ transition: 1s;
+ -webkit-transition: 1s;
+ -moz-transition: 1s;
+ -ms-transition: 1s;
+ -o-transition: 1s;
 }
 .div-addques {
  box-sizing: content-box;
@@ -1461,12 +1467,13 @@ main table tbody tr td button:hover {
  -o-border-radius: 0.75rem;
  margin-bottom: -40px;
 }
-.btn-div {
+.btn-div-correct-opt {
  display: flex;
  flex-direction: row;
  gap: -10px;
+ margin-top: 10%;
 }
-.btn-div button {
+.btn-div-correct-opt button {
  appearance: none;
  background-color: transparent;
  border-radius: 0.9375em;
@@ -1507,6 +1514,10 @@ main table tbody tr td button:hover {
  -ms-border-radius: 0.9375em;
  -o-border-radius: 0.9375em;
 }
+.btn-div-correct-opt button:hover {
+ background-color: var(--color-info-dark);
+}
+/*<---=========Profile Section=========---> */
 .form-profile {
  background-color: var(--color-background);
  cursor: default;
@@ -1570,13 +1581,12 @@ main table tbody tr td button:hover {
 .div-btn-profile button {
  appearance: none;
  background-color: transparent;
- border-radius: 0.9375em;
+ border-radius: 0.9375rem;
  box-sizing: border-box;
  color: var(--color-dark);
  cursor: pointer;
  display: inline-block;
- font-family: Roobert, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica,
-  Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+ font-family: Roobert, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica,  Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
  font-size: 16px;
  font-weight: 600;
  line-height: normal;
@@ -1603,8 +1613,8 @@ main table tbody tr td button:hover {
  -moz-transition: all 300ms cubic-bezier(0.23, 1, 0.32, 1);
  -ms-transition: all 300ms cubic-bezier(0.23, 1, 0.32, 1);
  -o-transition: all 300ms cubic-bezier(0.23, 1, 0.32, 1);
- -webkit-border-radius: 0.9375em;
- -moz-border-radius: 0.9375em;
- -ms-border-radius: 0.9375em;
- -o-border-radius: 0.9375em;
+ -webkit-border-radius: 0.9375rem;
+ -moz-border-radius: 0.9375rem;
+ -ms-border-radius: 0.9375rem;
+ -o-border-radius: 0.9375rem;
 }

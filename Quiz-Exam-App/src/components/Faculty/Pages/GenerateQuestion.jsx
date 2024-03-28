@@ -1,7 +1,26 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import FacultyPanel from "../FacultyPanel";
+import optionsData from "../../TableData/Technology JS Data";
 
 const GenerateQuestion = () => {
+ const [options, setOptions] = useState([]);
+ const [question,setQuestion] = useState("");
+ const [option1, setOption1] = useState("");
+ const [option2, setOption2] = useState("");
+ const [option3, setOption3] = useState("");
+ const [option4, setOption4] = useState("");
+ const [correctSolution, setCorrectSolution] = useState("");
+ const [technology, setTechnology] = useState("");
+ const [error, setError] = useState("");
+
+ const location = useLocation();
+ const username = location.state?.username;
+
+ useEffect(() => {
+  setOptions(optionsData.map((item) => item.options));
+ }, []);
+
  return (
   <>
    <FacultyPanel>
@@ -9,7 +28,7 @@ const GenerateQuestion = () => {
      <h1>GenerateQuestion</h1>
      <div className="form-addques">
       <div className="div-addques">
-       <form className="addques-section ">
+       <form className="addques-section">
         <h1>Add Question</h1>
         <p className="p2">Fill For Generate Questions</p>
         <div className="enter-ques">
@@ -43,20 +62,17 @@ const GenerateQuestion = () => {
           <option value="opt4">Option 04</option>
          </select>
          <select name="tech-select" id="tech-select">
-          <option value="default">Select Technology</option>
-          <option value="react">React</option>
-          <option value="nodejs">Node.Js</option>
-          <option value="Angular">Angular</option>
-          <option value="preact">Preact</option>
-          <option value="vue">Vue</option>
-          <option value="vanila">Vanila</option>
-          <option value="vite">Vite</option>
-          <option value="threejs">Three.Js</option>
-          <option value="nextjs">Next.Js</option>
-          <option value="driverjs">Driver.Js</option>
+          <option value="default" hidden>
+           Select Technology
+          </option>
+          {options.map((option, index) => (
+           <option key={index} value={option}>
+            {option}
+           </option>
+          ))}
          </select>
         </div>
-        <div className="btn-div">
+        <div className="btn-div-correct-opt">
          <button type="submit">Add Question</button>
          <button type="reset">Reset</button>
         </div>

@@ -84,15 +84,6 @@ const AddUser = () => {
      toast.error("Error adding new user");
     });
   }
-  const passwordRegex =
-   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-
-  if (!passwordRegex.test(password)) {
-   toast.error(
-    "Password must contain at least 8 characters, including a lowercase letter, an uppercase letter, a number, and a special character."
-   );
-   return;
-  }
  };
  /*<---=========Backend End=========---> */
  const resetForm = () => {

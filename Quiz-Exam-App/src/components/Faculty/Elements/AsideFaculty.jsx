@@ -98,7 +98,7 @@ const AsideFaculty = () => {
      >
       <span className="material-icons"> find_in_page </span>
       <h3>
-       Techs <span className="message-count">40+</span>
+       Techs <span className="message-count">{tech}</span>
       </h3>
      </Link>
      <Link

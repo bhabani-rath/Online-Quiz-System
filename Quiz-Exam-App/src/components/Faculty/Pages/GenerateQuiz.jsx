@@ -25,16 +25,16 @@ const GenerateQuiz = () => {
           className="tech-selector"
          >
           <option value="default">Select Technology</option>
-          <option value="react">React</option>
-          <option value="nodejs">Node.Js</option>
+          <option value="C">C</option>
+          <option value="C++">C++</option>
           <option value="Angular">Angular</option>
-          <option value="preact">Preact</option>
-          <option value="vue">Vue</option>
-          <option value="vanila">Vanila</option>
-          <option value="vite">Vite</option>
-          <option value="threejs">Three.Js</option>
-          <option value="nextjs">Next.Js</option>
-          <option value="driverjs">Driver.Js</option>
+          <option value="JAVA">JAVA</option>
+          <option value="Python">Python</option>
+          <option value="React">React</option>
+          <option value=".Net">.Net</option>
+          <option value="Kotlin">Kotlin</option>
+          <option value="nextjs">Next Js</option>
+          <option value="driverjs">Driver JS</option>
          </select>
         </div>
         <div className="btn-generate ">

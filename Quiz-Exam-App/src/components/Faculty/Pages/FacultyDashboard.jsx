@@ -3,17 +3,16 @@ import { useState, useEffect } from "react";
 import FacultyPanel from "../FacultyPanel";
 import logo from "../assetsFaculty/questprobelogo.svg";
 import { CategorySelectUser } from "../../Services/UserService";
+import axios from "axios";
 
 const FacultyDashboard = () => {
  // Backend Connection Start
  const [user, setUser] = useState([]);
- const [teacher, setTeacher] = useState(0);
  const [student, setStudent] = useState(0);
  const [error, setError] = useState("");
  const [ques, setQues] = useState(0);
  const [quiz, setQuiz] = useState(0);
  const [tech, setTech] = useState([]);
- const [admin, setAdmin] = useState("");
  const [username, setUsername] = useState("");
 
  useEffect(() => {
@@ -26,23 +25,6 @@ const FacultyDashboard = () => {
    .then((response) => {
     setUser(response.data);
     setStudent(response.data.length);
-    // console.log(response.data);
-   })
-   .catch((error) => console.log(error));
-
-  role = "faculty";
-  CategorySelectUser(role)
-   .then((response) => {
-    setUser(response.data);
-    setTeacher(response.data.length);
-    // console.log(response.data);
-   })
-   .catch((error) => console.log(error));
-  role = "admin";
-  CategorySelectUser(role)
-   .then((response) => {
-    setUser(response.data);
-    setAdmin(response.data.length);
     // console.log(response.data);
    })
    .catch((error) => console.log(error));
@@ -108,7 +90,7 @@ const FacultyDashboard = () => {
       <div className="middle">
        <div className="left">
         <h3>Total Quizzes Created</h3>
-        <h1>100+</h1>
+        <h1>{quiz}</h1>
        </div>
       </div>
       <small className="text-muted">Last 24 Hours</small>
@@ -120,7 +102,7 @@ const FacultyDashboard = () => {
       <div className="middle">
        <div className="left">
         <h3>Total Questions Created</h3>
-        <h1>1000+</h1>
+        <h1>{ques}</h1>
        </div>
       </div>
       <small className="text-muted">Last 24 Hours</small>
@@ -132,7 +114,7 @@ const FacultyDashboard = () => {
       <div className="middle">
        <div className="left">
         <h3>Total Technologies Created</h3>
-        <h1>50+</h1>
+        <h1>{tech}</h1>
        </div>
       </div>
       <small className="text-muted">Last 24 Hours</small>
@@ -144,7 +126,7 @@ const FacultyDashboard = () => {
       <div className="middle">
        <div className="left">
         <h3>Total Students Connected</h3>
-        <h1>5000+</h1>
+        <h1>{student}</h1>
        </div>
       </div>
       <small className="text-muted">Last 24 Hours</small>

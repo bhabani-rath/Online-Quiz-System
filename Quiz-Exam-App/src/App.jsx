@@ -29,11 +29,15 @@ import Students from "./components/Faculty/Pages/Students";
 import GenerateQuiz from "./components/Faculty/Pages/GenerateQuiz";
 import GenerateQuestion from "./components/Faculty/Pages/GenerateQuestion";
 import FacultyProfile from "./components/Faculty/Pages/FacultyProfile";
+import Page404 from "./components/404 Page/Page404";
+import ProtectedRoute from "./components/ProtectedRouteSystem/ProtectedRoute";
 
 function App() {
- //  document.addEventListener("contextmenu", function (e) {
+ {
+  /*//  document.addEventListener("contextmenu", function (e) {
  //   e.preventDefault();
- //  });
+//  });*/
+ }
  return (
   <>
    <Router>
@@ -42,12 +46,13 @@ function App() {
      <Route element={<LandPage />} path="/landpage"></Route>
      {/*<---=========Import Login=========---> */}
      <Route element={<LoginPageQuizApp />} path="/" />
+     {/* <Route element={<Page404 />} path="/*" /> */}
      {/*<---=========Import Admin/Elements=========---> */}
      <Route element={<Aside />} path="/aside" />
-     <Route element={<Profile />} path="/profile" />{" "}
+     <Route element={<Profile />} path="/profile" />
      {/*<Profile/> is same and used for Admin,Faculty and Student Panel.*/}
      {/* <---=========Admin Panel Route Pages Start=========---> */}
-     <Route element={<AdminPanel />} path="/adminpanel" />
+     <Route element={<ProtectedRoute  />} path="/adminpanel" />
      <Route element={<Dashboard />} path="/adminpanel/dashboard" />
      <Route element={<Allquiz />} path="/adminpanel/allquiz"></Route>
      <Route element={<AllTechnology />} path="/adminpanel/alltech"></Route>

@@ -123,37 +123,35 @@ const LoginPageQuizApp = () => {
      }
     );
    } else if (role.role === "student") {
-    toast(
+    toast.success(
      `Welcome ${username} to ${capitalizeFirstLetter(role.role)} Panel`,
-     { autoClose: 500, type: "success" },
      {
       onClose: () => {
-       navigate("/studentpanel/studentdashboard"),
-        {
-         state: {
-          username: username,
-          userid: role.id,
-          role: role.role
-         }
-        };
-      }
+       navigate("/studentpanel/studentdashboard", {
+        state: {
+         username: username,
+         userid: role.id,
+         role: role.role
+        }
+       });
+      },
+      autoClose: 500
      }
     );
    } else if (role.role === "faculty") {
-    toast(
+    toast.success(
      `Welcome ${username} to ${capitalizeFirstLetter(role.role)} Panel`,
-     { autoClose: 500, type: "success" },
      {
       onClose: () => {
-       navigate("/facultypanel/facultydashboard"),
-        {
-         state: {
-          username: username,
-          userid: role.id,
-          role: role.role
-         }
-        };
-      }
+       navigate("/facultypanel/facultydashboard", {
+        state: {
+         username: username,
+         userid: role.id,
+         role: role.role
+        }
+       });
+      },
+      autoClose: 500
      }
     );
    } else {
@@ -189,6 +187,15 @@ const LoginPageQuizApp = () => {
    inputElement1.removeEventListener("keyup", handleKeyUp);
   };
  }, []);
+ const login = () => {
+  localStorage.setItem("login", true);
+ };
+ useEffect(() => {
+  let login = localStorage.getItem("login");
+  if (!login) {
+   navigate("/*");
+  }
+ });
 
  //Design Part of Website
  return (
@@ -233,16 +240,16 @@ const LoginPageQuizApp = () => {
        />
        <div onClick={handleShowPassword}>
         {show ? (
-         <i className="fa-solid fa-eye-slash"></i>
-        ) : (
          <i className="fa-solid fa-eye"></i>
+        ) : (
+         <i className="fa-solid fa-eye-slash"></i>
         )}
        </div>
       </div>
       <div className="btn-div">
        <div className="div-btn-1">
         <Link onClick={handleSubmit} id="logins">
-         <button className="login-btn" type="submit">
+         <button className="login-btn" type="submit" onClick={login}>
           LogIn
          </button>
         </Link>

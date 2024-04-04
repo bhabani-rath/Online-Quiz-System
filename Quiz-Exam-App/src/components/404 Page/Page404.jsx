@@ -3,6 +3,13 @@ import "./Page404.css";
 import { Link } from "react-router-dom";
 
 const Page404 = () => {
+ useEffect(() => {
+  let login = localStorage.getItem("login");
+  if (!login) {
+   navigate("/*");
+  }
+ });
+
  return (
   <>
    {" "}

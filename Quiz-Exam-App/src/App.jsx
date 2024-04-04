@@ -29,7 +29,7 @@ import Students from "./components/Faculty/Pages/Students";
 import GenerateQuiz from "./components/Faculty/Pages/GenerateQuiz";
 import GenerateQuestion from "./components/Faculty/Pages/GenerateQuestion";
 import FacultyProfile from "./components/Faculty/Pages/FacultyProfile";
-import Page404 from "./components/404 Page/Page404";
+// import Page404 from "./components/404 Page/Page404";
 import ProtectedRoute from "./components/ProtectedRouteSystem/ProtectedRoute";
 
 function App() {

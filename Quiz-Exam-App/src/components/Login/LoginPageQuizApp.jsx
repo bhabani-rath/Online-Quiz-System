@@ -190,12 +190,7 @@ const LoginPageQuizApp = () => {
  const login = () => {
   localStorage.setItem("login", true);
  };
- useEffect(() => {
-  let login = localStorage.getItem("login");
-  if (!login) {
-   navigate("/*");
-  }
- });
+
 
  //Design Part of Website
  return (
@@ -264,7 +259,7 @@ const LoginPageQuizApp = () => {
     </div>
    </div>
    <ToastContainer
-    position="top-right"
+    position="top-center"
     autoClose={1000}
     hideProgressBar={false}
     newestOnTop={true}

@@ -31,6 +31,7 @@ import GenerateQuestion from "./components/Faculty/Pages/GenerateQuestion";
 import FacultyProfile from "./components/Faculty/Pages/FacultyProfile";
 // import Page404 from "./components/404 Page/Page404";
 import ProtectedRoute from "./components/ProtectedRouteSystem/ProtectedRoute";
+import SeeQuestions from "./components/Admin/Pages/SeeQuestions";
 
 function App() {
  {
@@ -52,7 +53,7 @@ function App() {
      <Route element={<Profile />} path="/profile" />
      {/*<Profile/> is same and used for Admin,Faculty and Student Panel.*/}
      {/* <---=========Admin Panel Route Pages Start=========---> */}
-     <Route element={<ProtectedRoute  />} path="/adminpanel" />
+     <Route element={<ProtectedRoute />} path="/adminpanel" />
      <Route element={<Dashboard />} path="/adminpanel/dashboard" />
      <Route element={<Allquiz />} path="/adminpanel/allquiz"></Route>
      <Route element={<AllTechnology />} path="/adminpanel/alltech"></Route>
@@ -62,6 +63,7 @@ function App() {
      <Route element={<AddUser />} path="/adminpanel/update-user/:id" />
      <Route element={<UserResponse />} path="/adminpanel/userResponse"></Route>
      <Route element={<Profiles />} path="/adminpanel/profiles"></Route>
+     <Route element={<SeeQuestions />} path="/admin/question/:tech"></Route>
      {/* <---=========Admin Route Pages End=========---> */}
      {/* <---=========Faculty Route Elements Start=========---> */}
      <Route element={<AsideFaculty />}></Route>
